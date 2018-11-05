@@ -160,15 +160,19 @@
 
 					this.placeorder = function()
 					{
-						var final_orders = [];
+						var final_orders = {};
+						var item_ids = [];
+						var item_quantity = [];
 
 						angular.forEach(this.cart,function(value,key)
 						{
-							var each_order = {};
-							each_order['Items_id'] = value.Items_id;
-							each_order['Item_count'] = value.count;
-							final_orders.push(each_order);
+							item_ids.push(value.Items_id);
+							item_quantity.push(value.count);	
 						});
+
+						final_orders['item_ids'] = item_ids;
+						final_orders['quantity'] = item_quantity;
+						final_orders['User_id'] = "";
 
 						$http.post("/customer/test",final_orders).
 							then(
