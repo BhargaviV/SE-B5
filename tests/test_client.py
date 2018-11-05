@@ -49,6 +49,11 @@ class TestApp:
 	def test_typography(self, client):
 		res = client.get(url_for('customer_typography'))
 		assert res.status_code == 200
-	# Canteen View Start
+	
+	##test for place order
+	def test(self,client):
+		res = client.get(url_for('customer_test'))
+		assert res.status_code == 200
+
 
 	

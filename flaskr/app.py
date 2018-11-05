@@ -134,8 +134,9 @@ def create_app():
 	
 
 	#Changed 
-	@app.route('/customer/typography.html')
+	@app.route('/customer/typography.html',methods=['GET','POST'])
 	def customer_typography():
+		print("hello" , request.form['canteen_id'])
 		return render_template('customer/typography.html', data = db_utils.get_items('Items', 'canteen'))
 
 	@app.route('/customer/icons.html')
