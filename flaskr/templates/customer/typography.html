@@ -3,21 +3,22 @@
 
 {% block content %}
 		<!-- MAIN -->
-		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
 		<div class="main" ng-app="fosapp">
-			
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid"> 
 					<h3 class="page-title">Select items </h3>
 					<div class="row"  ng-controller="fosctrl as ctrl">
-						
 						<!--item-->
-						<div class="col-md-9">
+						<div class="col-md-9" ng-init="ctrl.fillItems(canteen_items)">
 							<div class="col-md-4" ng-repeat="item in ctrl.items">
 							<div class="panel" >
 									<div class="panel-heading">
-										<h3 class="panel-title" >{a item.Items_name a}</h3>
+										<h3 class="panel-title" >{a item.Items_name a}
+											<button style="float: right;" ng-click="ctrl.addTofavorities(item.Items_id)" ng-class="{'fav' : item.isfavorite}">
+												<span><i class="lnr lnr-heart"></i></span>
+											</button>
+										</h3>
 										<img src="{{url_for('static', filename='canteen-owner/img/default_food.jpg')}}" class="img-fluid img-responsive img-thumbnail">
 									</div>
 									<div class="panel-body">
@@ -29,13 +30,11 @@
 							</div>
 						</div>
 						<!--item end-->
-
 						<!--your orders "
 							col-md-3  style="width:inherit;position:fixed;right:0;"
 							panel  style="max-height: 1500px;"
 							panel body style="max-height:200px;overflow-y:scroll;"
 						-->
-
 						<div class="col-md-3">
 						<div class="panel" >
 								<div class="panel-heading">
@@ -71,7 +70,6 @@
 									 	<!--ng-repeat end-->
 								 	</div>	
 								</div>
-
 								<!--panel footer -->
 								<div class="panel-footer">
 									<h4>Total price <span class="icon" style="float: right;"><i class="fa fa-inr"></i>{a ctrl.carttotal a}</span>
@@ -88,12 +86,20 @@
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
+			<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
+			<script type="text/javascript" src="{{url_for('static', filename='customer/angular_module.js')}}"></script>
 
-
+			<script type="text/javascript"> 
+			canteen_items = {{data|tojson|safe}}; 
+			console.log(canteen_items);
+		</script>
 			<script type="text/javascript">
 
+
+
+
 				//Replace double flower  with {a a} for angular becuase it conflicts with jinja
-				var app=angular.module('fosapp',[]);
+				/*var app=angular.module('fosapp',[]);
 				app.config(['$interpolateProvider',function($interpolateProvider)
 				{
 					$interpolateProvider.startSymbol('{a');
@@ -105,6 +111,7 @@
 						
 					//Global items
 					this.items = {{data|tojson|safe}};
+					this.favorities = [];
 					this.cart = [];
 					this.carttotal = 0;
 
@@ -174,8 +181,7 @@
 						final_orders['quantity'] = item_quantity;
 						final_orders['User_id'] = "";
 
-						$http.post("/customer/test",final_orders).
-							then(
+						$http.post("/customer/test",final_orders).then(
 								function success(response)
 								{
 									console.log(response);
@@ -188,10 +194,16 @@
 						console.log(final_orders);
 					}
 
+					this.addTofavorities = function(itemindex)
+					{
+						var index = this.items.findIndex(item=>item.Items_id == itemindex);
+						this.items[index].isfavorite = !this.items[index].isfavorite  ;
+					}
 
-				}]);
+				}]);*/
 				
 			</script>
+			
 			
 		</div>
 		<!--END MAIN -->
