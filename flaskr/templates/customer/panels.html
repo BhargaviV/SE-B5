@@ -6,33 +6,31 @@
 		<!-- MAIN -->
 		<div class="main">
 						<!-- MAIN CONTENT -->
-						<div class="main-content">
-							<div class="container-fluid"> <h3 class="page-title">Orders per item</h3>
+						<div class="main-content" ng-app="fosapp">
+							<div class="container-fluid"> <h3 class="page-title">Favorites</h3>
 								<div class="row">
 									<!--ORDERS LIST-->
 									<div class="col-md-14" >
 									<div class="panel">
 											<div class="panel-heading">
-												<h3 class="panel-title">Order List</h3>
+												<h3 class="panel-title">Your favorite list</h3>
 											</div>
 											<div class="panel-body table-responsive">
-												<table class="table table-striped">
+												<table class="table table-striped" ng-controller="favctrl as ctrl">
 													<thead>
 														<tr>
 															<th>Item </th>
 															<th>Item Name</th>
-															<th>Orders</th>
-															<th>Paid</th>
-															<th>Unpaid</th>
+															<th>Item description</th>
+															<th>Price</th>
 														</tr>
 													</thead>
-													<tbody>
-														<tr>
+													<tbody >
+														<tr ng-repeat="fav_item in ctrl.list">
 															<td><img src="{{url_for('static', filename='canteen-owner/img/default_food.jpg')}}" style="width:100px;height:80px;"></td>
-															<td></td>
-															<td></td>
-															<td></td>
-															<td></td>
+															<td>{a fav_item.Item_name a}</td>
+															<td>{a fav_item.Description a}</td>
+															<td>{a fav_item.Price a}</td>
 														</tr>	
 													</tbody>
 												</table>
@@ -44,6 +42,8 @@
 							</div>
 						</div>
 						<!-- END MAIN CONTENT -->
+		<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>	
+		<script type="text/javascript" src="{{url_for('static', filename='customer/angular_module.js')}}"></script>
 		</div>
 		<!-- END MAIN -->
 {% endblock %}

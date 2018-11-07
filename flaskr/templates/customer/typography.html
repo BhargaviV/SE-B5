@@ -16,7 +16,7 @@
 						<div class="panel" >
 								<div class="panel-heading">
 									<h3 class="panel-title" >{a item.Items_name a}
-										<button style="float: right;" ng-click="ctrl.addfavorites(item.Items_id) ">
+										<button style="float: right;" ng-click="ctrl.isfavorites(item) ">
 											<span><i class="fa fa-heart" ng-class="{'isfav' : item.isfavorite, 'isnotfav' : !item.isfavorite}"></i></span>
 										</button>
 									</h3>
@@ -25,7 +25,7 @@
 								<div class="panel-body">
 									<p style="height: 25px;overflow-y: scroll;">{a item.Description a}</p>
 									<p><span class="icon"><i class="fa fa-inr"></i></span>{a item.Price a}</p>
-									<button class="btn btn-default btn-block" ng-click="ctrl.addTocart(item.Items_id)" ng-disabled="item.disabled">Add to cart</button>
+									<button class="btn btn-default btn-block" ng-click="ctrl.addTocart(item)" ng-disabled="item.disabled">Add to cart</button>
 								</div>
 						</div>
 						</div>
@@ -64,7 +64,7 @@
 								 	</p>
 								 	<button type="button" 
 								 			class="btn btn-danger" 
-								 			ng-click="ctrl.removeFromcart(item.Items_id)">
+								 			ng-click="ctrl.removeFromcart(item)">
 								 			<i class="lnr lnr-trash"></i>
 								 	</button>
 								 	<hr>
